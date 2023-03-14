@@ -6,24 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="script.js" type="text/js"></script>
     <title>Calculadora</title>
+
+    <style>
+      button{
+        height: 30px;
+        width: 200px;
+        font-size: 15px;
+      }
+
+      input {
+        height: 30px;
+        width: 200px;
+      }
+    </style>
   </head>
-  <body style="background-color: rgb(54, 146, 115)">
+  <body style="background-color: whitesmoke">
     <h1>Calculadora</h1>
     <form>
       <input type="text" id="v1" />
       <input type="text" id="v2" />
-      <button type="button" onclick="Somar()">Somar</button>
+      <button type="button" onclick="Operacao('+')" value="somar">Somar</button>
+      <button type="button" onclick="Operacao('-')">Subtrair</button>
+      <button type="button" onclick="Operacao('*')">Multiplicar</button>
+      <button type="button" onclick="Operacao('/')">Dividir</button><br />
+
       <input type="text" disabled id="resultado" />
     </form>
 
     <script>
-      function Somar() {
+      function Operacao(op) {
         var valor1 = parseFloat(document.getElementById("v1").value);
         var valor2 = parseFloat(document.getElementById("v2").value);
         var resultado = document.getElementById("resultado");
-        var resultado_soma;
-        resultado_soma = valor1 + valor2;
-        resultado.value = resultado_soma;
+        var resultado_conta;
+
+        switch (op) {
+          case "+":
+            resultado_conta = valor1 + valor2;
+            break;
+
+          case "-":
+            resultado_conta = valor1 - valor2;
+            break;
+
+          case "*":
+            resultado_conta = valor1 * valor2;
+            break;
+
+          case "/":
+            resultado_conta = valor1 / valor2;
+            break;
+        }
+        resultado.value = resultado_conta;
       }
     </script>
   </body>
