@@ -1,69 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="script.js" type="text/js"></script>
+<html>
+  <head>
     <title>Calculadora</title>
-
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <style>
-        button {
-            height: 30px;
-            width: 70px;
-            font-size: 15px;
-        }
-        
-        input {
-            height: 30px;
-            width: 200px;
-        }
+      .calculadora {
+        width: 240px;
+        margin: 0 auto;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .display {
+        background-color: white;
+        padding: 10px;
+        text-align: right;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .numero,
+      .operador,
+      .clear,
+      .igual {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        border-radius: 5px;
+        background-color: lightgray;
+        color: black;
+        font-size: 20px;
+        border: none;
+      }
+
+      .igual {
+        background-color: orange;
+        color: white;
+      }
+
+      .clear {
+        background-color: red;
+        color: white;
+      }
     </style>
-</head>
-
-<body style="background-color: whitesmoke; ">
-    <fieldset style="display: block; margin: 0 auto; flex-direction: column;">
-        <h1>Calculadora</h1>
-        <form>
-            <input type="text" id="v1" />
-            <input type="text" id="v2" />
-            <button type="button" onclick="Operacao('+')" value="somar">+</button>
-            <button type="button" onclick="Operacao('-')">-</button>
-            <button type="button" onclick="Operacao('*')">X</button>
-            <button type="button" onclick="Operacao('/')">/</button><br />
-
-            <input type="text" disabled id="resultado" />
-        </form>
-    </fieldset>
+  </head>
+  <body>
+    <div class="calculadora">
+      <div class="display">
+        <input type="text" id="result" disabled />
+      </div>
+      <div class="buttons">
+        <button class="numero" onclick="addNumero('7')">7</button>
+        <button class="numero" onclick="addNumero('8')">8</button>
+        <button class="numero" onclick="addNumero('9')">9</button>
+        <button class="operador" onclick="addOperador('/')">/</button>
+        <button class="numero" onclick="addNumero('4')">4</button>
+        <button class="numero" onclick="addNumero('5')">5</button>
+        <button class="numero" onclick="addNumero('6')">6</button>
+        <button class="operador" onclick="addOperador('')"></button>
+        <button class="numero" onclick="addNumero('1')">1</button>
+        <button class="numero" onclick="addNumero('2')">2</button>
+        <button class="numero" onclick="addNumero('3')">3</button>
+        <button class="operador" onclick="addOperador('-')">-</button>
+        <button class="numero" onclick="addNumero('0')">0</button>
+        <button class="numero" onclick="addNumero('.')">.</button>
+        <button class="clear" onclick="clearResult()">C</button>
+        <button class="operador" onclick="addOperador('+')">+</button>
+        <button class="igual" onclick="calculate()">=</button>
+      </div>
+    </div>
 
     <script>
-        function Operacao(op) {
-            var valor1 = parseFloat(document.getElementById("v1").value);
-            var valor2 = parseFloat(document.getElementById("v2").value);
-            var resultado = document.getElementById("resultado");
-            var resultado_conta;
+      let result = document.getElementById("result");
 
-            switch (op) {
-                case "+":
-                    resultado_conta = valor1 + valor2;
-                    break;
+      function addNumero(num) {
+        result.value += num;
+      }
 
-                case "-":
-                    resultado_conta = valor1 - valor2;
-                    break;
+      function addOperador(operador) {
+        result.value += operador;
+      }
 
-                case "*":
-                    resultado_conta = valor1 * valor2;
-                    break;
+      function calculate() {
+        result.value = eval(result.value);
+      }
 
-                case "/":
-                    resultado_conta = valor1 / valor2;
-                    break;
-            }
-            resultado.value = resultado_conta;
-        }
+      function clearResult() {
+        result.value = "";
+      }
     </script>
-</body>
-
+  </body>
 </html>
